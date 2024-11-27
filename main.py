@@ -36,8 +36,21 @@ def generate_password(min_lengths, numbers=True, special_characters=True):
         
     return pwd
  
-min_length = int(input("Enter the minimum length for your password: "))
-has_number = input("Do you want to have numbers(y/n): ").lower() == "y"
-has_special = input("Do you want to have special(y/n): ").lower() == "y"
-pwd = generate_password(min_length, has_number, has_special)
-print(f"Your password is... {pwd}")
+
+def local_main():
+    min_length = int(input("Enter the minimum length for your password: "))
+    has_number = input("Do you want to have numbers(y/n): ").lower() == "y"
+    has_special = input("Do you want to have special(y/n): ").lower() == "y"
+    pwd = generate_password(min_length, has_number, has_special)
+    print(f"Your password is... {pwd}")
+
+
+def html_main(p):
+    from pyscript import document
+
+    result = document.querySelector("#result")
+    min_length = document.querySelector("#min-length")
+    has_num = document.querySelector("#has-num")
+    has_special = document.querySelector("#has-special")
+    password = generate_password(int(min_length.value), has_num.checked, has_special.checked)
+    result.innerText = f"{password}" 
